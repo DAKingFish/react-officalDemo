@@ -1,0 +1,45 @@
+.app{
+  width: 100vw;
+  height: 100vh;
+  background-color: #eee;
+  &-header{
+    height: 64px;
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+  }
+  &-main{
+    display: flex;
+    width: 100%;
+    height: calc(100% - 64px);
+    &-sider{
+      width: 260px;
+      height: 100%;
+      background-color: #f6f6f6;
+      &-item, &-item-selected{
+        height: 40px;
+        display: flex;
+        padding: 12px;
+        align-items: center;
+        cursor: pointer;
+        transition: .5s;
+        &:hover{
+          background-color: #1890ff;
+          transition: .5s;
+        }
+      }
+      &-item-selected{
+        background-color: #1890ff;
+        color: #fff;
+      }
+    }
+    &-content{
+      padding: 12px;
+      width: calc(100% - 260px);
+      height: 100%;
+      background-color: #eee;
+    }
+  }
+}
