@@ -4,7 +4,6 @@ import request from '@/request';
 
 // 获取列表
 export const getList = (params = {}) => {
-  return  request.get('/home/list', {
-    params
-  })
+  // axios 约定了，get请求的参数需要放到 params 对象里面，但是 post 请求不需要，直接做为第二个参数传入即可
+  return request.post('/home/list', params)
 }
