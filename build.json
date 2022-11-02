@@ -1,5 +1,10 @@
 {
   "vite": false,
+  "router": {
+    "ignorePaths": [
+      "schema"
+    ]
+  },
   "plugins": [
     [
       "build-plugin-ignore-style",
