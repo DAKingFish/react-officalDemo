@@ -53,8 +53,10 @@ export const tableColumns = ({ query, form2, setOpen }) => [
                   } = await remove(record.id);
                   if (code === 200) {
                     message.success('删除成功');
-                    // 刷新列表
-                    query();
+                    // 回到第一页
+                    query({
+                      pageNum: 1
+                    });
                   } else {
                     message.error(msg);
                   }

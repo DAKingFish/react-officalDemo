@@ -1,4 +1,4 @@
-import { Table, Form, Input, Button, Space, Modal, message } from 'antd';
+import { Table, Form, Input, Button, Space, Modal, message, Pagination } from 'antd';
 import { useEffect, useState } from 'react';
 import { getList, save } from './services';
 import { tableColumns } from './schema/table';
@@ -7,6 +7,11 @@ import './index.less';
 
 export default () => {
   const [dataSource, setDateSource]: any = useState([]);
+  const [pagination, setPagination] = useState({
+    total: 0,
+    pageNum: 1,
+    pageSize: 2,
+  })
   const [loading, setLoading]: any = useState(false);
   const [form] = Form.useForm(); // step1 声明
   const [form2] = Form.useForm();
@@ -14,12 +19,19 @@ export default () => {
   // query 接受查询的参数
   const query = async (params = {}) => {
     setLoading(true);
+    // 请求的参数
+    const payload = {
+      ...pagination,
+      ...params,
+    }
     const {
       data: { code, data },
-    }: any = await getList(params);
+    }: any = await getList(payload);
     setLoading(false);
     if (code === 200) {
-      setDateSource(data.data);
+      pagination.total = data.count;
+      pagination.pageNum = payload.pageNum;
+      setDateSource(data.data); // 设置当前展示的数据
     }
   };
   // 添加表单
@@ -42,9 +54,10 @@ export default () => {
     }
   };
   useEffect(() => {
+    console.log(pagination);
     // 页面一加载我们开始设置数据、调用 api 发起请求获取数据
     query();
-  }, []);
+  }, [pagination]); // 配置依赖项,只有当这个 pagination 对象发生改变（引用地址变化）才会，而pagination的属性发生变化不会触发
 
   return (
     <div className="pages-home">
@@ -87,6 +100,8 @@ export default () => {
               <Button
                 type="primary"
                 onClick={() => {
+                  // 重置
+                  form2.resetFields()
                   addForm();
                 }}
               >
@@ -104,12 +119,34 @@ export default () => {
         </div>
         <Table
           dataSource={dataSource}
+          pagination={false}
           loading={loading}
+          scroll={{
+            y: 600
+          }}
           columns={tableColumns({
             query,
             form2,
             setOpen,
           })}
+        />
+        <Pagination 
+          current={pagination.pageNum} 
+          total={pagination.total}
+          pageSize={pagination.pageSize} 
+          showSizeChanger
+          pageSizeOptions={[2, 3, 6]}
+          showQuickJumper
+          onChange={(pageNum, pageSize) => {
+            setPagination({
+              total: pagination.total,
+              pageNum,
+              pageSize
+            })
+          }}
+          showTotal={() => {
+            return `总计 ${pagination.total} 条数据`
+          }}
         />
       </div>
       {/* 用户添加的表单 */}
