@@ -2,6 +2,7 @@ import { Table, Form, Input, Button, Space, Modal, message } from 'antd';
 import { useEffect, useState } from 'react';
 import { getList, save } from './services';
 import { tableColumns } from './schema/table';
+import { formItems } from './schema/form';
 import './index.less';
 
 export default () => {
@@ -13,7 +14,7 @@ export default () => {
     const { data: { code, data } }: any = await getList(params);
     setLoading(false)
     if (code === 200) {
-      setDateSource(data);
+      setDateSource(data.data);
     }
   }
   // 添加表单
@@ -105,28 +106,13 @@ export default () => {
       onOk={onSubmit}
     >
       <Form form={form2}>
-        {/* 主键ID */}
-        <Form.Item name='id' hidden>
-          <Input />
-        </Form.Item>
-        {/* 这个required设置为true 仅仅只是样式多了一个必填写标识，不会用来校验 */}
-        <Form.Item label='姓名' name='name' rules={
-          [{
-            required: true,
-            message: '姓名不能为空'
-          }]
-        }>
-          <Input />
-        </Form.Item>
-        <Form.Item label='年龄' name='age'>
-          <Input />
-        </Form.Item>
-        <Form.Item label="地址" name='address'>
-          <Input />
-        </Form.Item>
-        <Form.Item label="标签" name="tags">
-          <Input />
-        </Form.Item>
+        {
+          formItems.map(item => {
+            return <Form.Item {...item}>
+              <Input />
+            </Form.Item>
+          })
+        }
       </Form>
     </Modal>
   </div >
