@@ -6,10 +6,10 @@ import axios from 'axios';
 const axiosInstance = axios.create({
   baseURL: 'http://121.4.49.147:8361',
   headers: {
-    appkey: 'TttxBH3CxRumOqHyJV34WbUt00B3CZKwP'
-  }
-})
+    appkey: 'TttxBH3CxRumOqHyJV34WbUt00B3CZKwP',
+  },
+});
 
 // 拦截器 TODO
 
-export default axiosInstance; 
+export default axiosInstance;
