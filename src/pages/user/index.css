@@ -1,0 +1,8 @@
+.user {
+  padding: 12px;
+}
+.user .nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
