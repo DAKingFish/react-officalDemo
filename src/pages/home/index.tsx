@@ -6,32 +6,32 @@ import { formItems } from './schema/form';
 import './index.less';
 
 export default () => {
-  const [dataSource, setDateSource]: any = useState([]);
+  const [dataSource, setDataSource]: any = useState([]); // 将从后端获取数据存储dataSource方便存储
   const [pagination, setPagination] = useState({
     total: 0,
     pageNum: 1,
     pageSize: 2,
-  })
-  const [loading, setLoading]: any = useState(false);
+  }); // 抽取成翻页对象,
+  const [loading, setLoading]: any = useState(false); // table页面的加载
   const [form] = Form.useForm(); // step1 声明
-  const [form2] = Form.useForm();
-  const [open, setOpen] = useState(false); // 展开修改页
-  // query 接受查询的参数
+  const [form2] = Form.useForm(); // 每个Form表单都有自己的
+  const [open, setOpen] = useState(false); // 是否展开添加页面的状态
+  // query 接受查询的参数 parms={} 空对象? 这种写法到底是固定搭配
   const query = async (params = {}) => {
     setLoading(true);
-    // 请求的参数
+    // 请求的参数 payload 中一个用法 相同属性,后面属性值会替换前面的属性值
     const payload = {
       ...pagination,
       ...params,
-    }
+    };
     const {
-      data: { code, data },
-    }: any = await getList(payload);
+      data: { code, data }, // 解构,多层解构,的对象解构
+    }: any = await getList(payload); // 看样子,根据传的参获取数据,获取数据的逻辑判断是
     setLoading(false);
     if (code === 200) {
       pagination.total = data.count;
       pagination.pageNum = payload.pageNum;
-      setDateSource(data.data); // 设置当前展示的数据
+      setDataSource(data.data); // 设置当前展示的数据
     }
   };
   // 添加表单
@@ -58,6 +58,7 @@ export default () => {
     // 页面一加载我们开始设置数据、调用 api 发起请求获取数据
     query();
   }, [pagination]); // 配置依赖项,只有当这个 pagination 对象发生改变（引用地址变化）才会，而pagination的属性发生变化不会触发
+  // pagination 通过useState setPagination 就会触发useEffect,重新渲染页面
 
   return (
     <div className="pages-home">
@@ -101,7 +102,7 @@ export default () => {
                 type="primary"
                 onClick={() => {
                   // 重置
-                  form2.resetFields()
+                  form2.resetFields();
                   addForm();
                 }}
               >
@@ -119,10 +120,10 @@ export default () => {
         </div>
         <Table
           dataSource={dataSource}
-          pagination={false}
+          pagination={false} // 注销自带分页组件
           loading={loading}
           scroll={{
-            y: 600
+            y: 600,
           }}
           columns={tableColumns({
             query,
@@ -130,10 +131,10 @@ export default () => {
             setOpen,
           })}
         />
-        <Pagination 
-          current={pagination.pageNum} 
+        <Pagination
+          current={pagination.pageNum}
           total={pagination.total}
-          pageSize={pagination.pageSize} 
+          pageSize={pagination.pageSize}
           showSizeChanger
           pageSizeOptions={[2, 3, 6]}
           showQuickJumper
@@ -141,11 +142,11 @@ export default () => {
             setPagination({
               total: pagination.total,
               pageNum,
-              pageSize
-            })
+              pageSize,
+            });
           }}
           showTotal={() => {
-            return `总计 ${pagination.total} 条数据`
+            return `总计 ${pagination.total} 条数据`;
           }}
         />
       </div>
@@ -154,9 +155,9 @@ export default () => {
         open={open}
         title="添加用户"
         onCancel={() => {
-          setOpen(false);
+          setOpen(false); // 会自动清空输入框
         }}
-        onOk={onSubmit}
+        onOk={onSubmit} // 自带的属性方法
       >
         <Form form={form2}>
           {formItems.map((item) => {

@@ -5,4 +5,18 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: lightgreen;
+  margin-bottom: 0;
+}
+.user .nav .nav-form {
+  display: flex;
+  align-items: center;
+}
+.user .context {
+  margin-top: 12px;
+}
+.user .context .context-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

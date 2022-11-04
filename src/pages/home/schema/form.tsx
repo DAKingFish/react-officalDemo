@@ -1,3 +1,5 @@
+// 本页面同arr.map映射到Form.Item上
+// id是自增的,不需要添加的时间修改
 export const formItems = [
   {
     name: 'id',
