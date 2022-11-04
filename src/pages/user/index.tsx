@@ -41,13 +41,13 @@ export default () => {
   const onSubmit = async () => {
     // 用useForm钩子将Modal数据
     const value = await form2.validateFields();
-    const rews = await save(value);
-    if (rews.data.code === 200) {
+    const res = await save(value);
+    if (res.data.code === 200) {
       message.success('添加用户成功');
       query();
       setOpen(false);
     } else {
-      message.error(!rews.data.msg ? '服务器炸了' : rews.data.msg);
+      message.error(res.data.msg || '服务器炸了');
       setOpen(false);
     }
   };
@@ -59,7 +59,7 @@ export default () => {
       <div className="nav">
         <div className="left">
           {/* 添加 */}
-          <Form form={form} className="nav-form">
+          <Form layout="inline" form={form} className="nav-form">
             <Form.Item label="姓名" name="username">
               <Input placeholder="请输入用户的姓名" />
             </Form.Item>
