@@ -3,6 +3,7 @@
  */
 
 import { Space } from "antd";
+import Item from "antd/lib/list/Item";
 /** 
  * es6 
  *   对象的遍历
@@ -69,7 +70,7 @@ const Map = () => {
   </div>
 }
 
-// find 查找某一个元素, 返回 boolean, 当返回是 true，直接结束循环，就有阻断的特性
+// find 查找某一个元素, 返回 boolean, 当返回是 true，直接结束循环，就有阻断的特性 没找到返回就是 undefined
 const Find = () => {
   const arr = [{ name: 'qw', age: 5 }, { name: 'asds', age: 6 }, { name: 100, age: 10 }];
   const result: any = arr.find((item) => {
@@ -78,7 +79,7 @@ const Find = () => {
   return <span>{result.age}</span>
 }
 
-// findIndex 查找某一个元素下标, 返回 boolean, 当返回是 true，直接结束循环，就有阻断的特性
+// findIndex 查找某一个元素下标, 返回 boolean, 当返回是 true，直接结束循环，就有阻断的特性，没找到就返回 -1
 const FindIndex = () => {
   const arr = [{ name: 'qw', age: 5 }, { name: 'asds', age: 6 }, { name: 100, age: 10 }];
   const index: any = arr.findIndex((item) => {
@@ -121,8 +122,19 @@ const Filter = () => {
   </div>
 }
 
+// 通常用来求和或者是累积的作用
+const Reduce = () => {
+  const arr = [1, 2, 3, 4, 5, 6, 7, 8, 10];
+  return <span>
+    {
+      arr.reduce((currentItem, nextItem, currentIndex, nextIndex) => {
+        return currentItem + nextItem
+      }, 10)
+    }
+  </span>
+}
 
 
 export default () => {
-  return <Filter />
+  return <Reduce />
 }
