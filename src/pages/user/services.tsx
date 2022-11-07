@@ -8,13 +8,13 @@ import request from '@/request';
 /user/remove */
 export const getList = (params = {}) => {
   // post请求不需要{}
-  return request.get('/user/list', { params });
+  return request.get('/online/user/list', { params });
 };
 
 export const save = (params = {}) => {
-  return request.post('/user/save', params);
+  return request.post('/online/user/save', params);
 };
 
 export const remove = (params = {}) => {
-  return request.post('user/remove', params);
+  return request.post('/online/user/remove', params);
 };

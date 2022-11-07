@@ -4,7 +4,7 @@ import axios from 'axios';
 // 创建 axios 实例
 
 const axiosInstance = axios.create({
-  baseURL: 'http://121.4.49.147:8361',
+  withCredentials: true, // 自动携带 cookie
   headers: {
     appkey: 'TttxBH3CxRumOqHyJV34WbUt00B3CZKwP',
   },
