@@ -8,6 +8,7 @@ export default (props) => {
   // 路由实例
   const history = useHistory();
   const [selectKey, setSelectKey] = useState('');
+  // TODO 在这里发请求获取用户信息，先判断用户是否已经登录了
   return (
     <ConfigProvider locale={zhCn}>
       <div className="app">
