@@ -52,7 +52,7 @@ const IsString = () => {
     <span>
       isString
       {
-        // "1,2,3,4,5" => 按照逗号分隔 split(',') =>  ['1', '2', '3', '4', '5']
+        // "1,2,3,4,5" => 按照逗号分隔 split(',') => ['1', '2', '3', '4', '5']
         // String(8989) => "8989";
         // "abcdefg" => ? "cde";  substr(2,3) => (下标, 要多少个)  substring(4,5) => (下标, 第几个)
         // "abcdfhj" => "bcd"; includes("bcd") => 返回的是布尔值
@@ -73,7 +73,7 @@ const IsUndefined = () => {
    * 2、0 == false // true
    * 3、1 == true // true
    */
-  var name = 90;
+  // var name = 90;
   /**
    * var name = undefined;
    * name = 90;

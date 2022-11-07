@@ -5,18 +5,23 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: lightgreen;
   margin-bottom: 0;
+  background-color: #fff;
+  padding: 0 12px;
 }
 .user .nav .nav-form {
   display: flex;
   align-items: center;
+  height: 64px;
 }
 .user .context {
   margin-top: 12px;
+  border-top: 1px solid #fff;
 }
 .user .context .context-nav {
   display: flex;
+  height: 60px;
   justify-content: space-between;
   align-items: center;
+  margin-right: 14px;
 }

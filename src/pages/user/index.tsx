@@ -5,7 +5,7 @@ import './index.less';
 import { getList, save } from './services';
 import { add } from './data/add';
 export default () => {
-  // 存放渲染数据源 useState
+  // 存放渲染数据源 useState 将是后台查询setDataSource
   const [dataSource, setDataSource]: any = useState([]);
   // 个人分析,在useEffect中作为监听的对象,因为后面有页面翻页大小的需求
   // monkey将本来所有的监听单个值作为属性 抽取到一个对象中
@@ -14,7 +14,8 @@ export default () => {
   const [loading, setLoading] = useState(false);
   // 添加用户的弹窗状态,默认是关的
   const [open, setOpen] = useState(false);
-  const [form] = Form.useForm(); // 解构出来第一个就是from
+  // 解构出来第一个就是from
+  const [form] = Form.useForm();
   const [form2] = Form.useForm();
   // 创建query查询,创建请求
   const query = async (parms = {}) => {
@@ -46,6 +47,12 @@ export default () => {
       message.success('添加用户成功');
       query();
       setOpen(false);
+      form2.setFieldsValue({
+        userName: undefined,
+        userAge: undefined,
+        userLiked: undefined,
+        userPhone: undefined,
+      });
     } else {
       message.error(res.data.msg || '服务器炸了');
       setOpen(false);
@@ -97,22 +104,24 @@ export default () => {
         <div className="context-nav">
           <div>用户列表</div>
           <div>
-            <Button
-              type="primary"
-              onClick={() => {
-                // 弹窗添加,这里可以用setOPen,具体操作在modal组件中
-                setOpen(true);
-              }}
-            >
-              添加
-            </Button>
-            <Button
-              onClick={() => {
-                query();
-              }}
-            >
-              刷新
-            </Button>
+            <Space>
+              <Button
+                type="primary"
+                onClick={() => {
+                  // 弹窗添加,这里可以用setOPen,具体操作在modal组件中
+                  setOpen(true);
+                }}
+              >
+                添加
+              </Button>
+              <Button
+                onClick={() => {
+                  query();
+                }}
+              >
+                刷新
+              </Button>
+            </Space>
           </div>
         </div>
         <Table dataSource={dataSource} columns={table()} loading={loading} />
@@ -121,7 +130,7 @@ export default () => {
         open={open}
         title="添加用户"
         onCancel={() => {
-          setOpen(false); // 会自动清空输入框
+          setOpen(false); // 会自动清空输入框,(ps有时可以,有时又不行)
         }}
         onOk={onSubmit}
       >

@@ -8,13 +8,13 @@ import './index.less';
 export default () => {
   const [dataSource, setDataSource]: any = useState([]); // 将从后端获取数据存储dataSource方便存储
   const [pagination, setPagination] = useState({
-    total: 0,
-    pageNum: 1,
-    pageSize: 2,
+    total: 0, // 查询总数
+    pageNum: 1, // 当前页码
+    pageSize: 2, // 总页码
   }); // 抽取成翻页对象,
   const [loading, setLoading]: any = useState(false); // table页面的加载
   const [form] = Form.useForm(); // step1 声明
-  const [form2] = Form.useForm(); // 每个Form表单都有自己的
+  const [form2] = Form.useForm(); // 每个Form表单都有自己的form
   const [open, setOpen] = useState(false); // 是否展开添加页面的状态
   // query 接受查询的参数 parms={} 空对象? 这种写法到底是固定搭配
   const query = async (params = {}) => {
