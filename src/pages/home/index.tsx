@@ -137,7 +137,7 @@ export default () => {
           pageSize={pagination.pageSize}
           showSizeChanger
           pageSizeOptions={[2, 3, 6]}
-          showQuickJumper
+          showQuickJumper // 页码的快速跳转
           onChange={(pageNum, pageSize) => {
             setPagination({
               total: pagination.total,

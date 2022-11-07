@@ -124,7 +124,7 @@ export default () => {
             </Space>
           </div>
         </div>
-        <Table dataSource={dataSource} columns={table()} loading={loading} />
+        <Table dataSource={dataSource} columns={table({ query, form2, setOpen })} loading={loading} />
       </div>
       <Modal
         open={open}

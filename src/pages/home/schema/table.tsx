@@ -57,7 +57,7 @@ export const tableColumns = ({ query, form2, setOpen }) => [
                   } = await remove(record.id);
                   if (code === 200) {
                     message.success('删除成功');
-                    // 回到第一页
+                    // 回到第一页 会覆盖pagition中相同属性名的值
                     query({
                       pageNum: 1,
                     });
