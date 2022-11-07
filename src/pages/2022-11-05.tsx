@@ -14,24 +14,26 @@ const IsNumber = () => {
    */
   const a = '10.23';
   const b = '10.1';
-  return <span>
-    IsNumber
-    {
-      // parseInt(a) + parseInt(b)
-      // Number(a) + Number(b)
-      // Math.floor(Number(a) + Number(b))
-      // Math.round(Number(a) + Number(b))
-      // Math.ceil(Number(a) + Number(b))
-      // Math.round(Math.random() * 10) // 生成一个 0-10 的随机数
-      // Math.round(Math.random() * 5) + 5 // 生成一个 5-10 的随机数
-      // window.parseInt("weew"), Number("sdsd") NaN
-      // parseInt 和 Number 的区别 1: Number 默认会保留小数部分、2: parseInt只有遇到第一个不能转换的字符才停止，Number是整体看待 3: 
-      // const res = [1,2,3].map(parseInt) => parseInt(1,0) parseInt(2,1) parseInt(3,2)
-      // 0.1 + 0.2 !== 0.3 采用乘 1000000000，计算结果在除 1000000000
-      // 采用 Number(0.023233).toFixed(2) => "0.02" => Number 转换下 得到0.02
-    }
-  </span>
-}
+  return (
+    <span>
+      IsNumber
+      {
+        // parseInt(a) + parseInt(b)
+        // Number(a) + Number(b)
+        // Math.floor(Number(a) + Number(b))
+        // Math.round(Number(a) + Number(b))
+        // Math.ceil(Number(a) + Number(b))
+        // Math.round(Math.random() * 10) // 生成一个 0-10 的随机数
+        // Math.round(Math.random() * 5) + 5 // 生成一个 5-10 的随机数
+        // window.parseInt("weew"), Number("sdsd") NaN
+        // parseInt 和 Number 的区别 1: Number 默认会保留小数部分、2: parseInt只有遇到第一个不能转换的字符才停止，Number是整体看待 3:
+        // const res = [1,2,3].map(parseInt) => parseInt(1,0) parseInt(2,1) parseInt(3,2)
+        // 0.1 + 0.2 !== 0.3 采用乘 1000000000，计算结果在除 1000000000
+        // 采用 Number(0.023233).toFixed(2) => "0.02" => Number 转换下 得到0.02
+      }
+    </span>
+  );
+};
 
 const IsString = () => {
   /**
@@ -46,22 +48,24 @@ const IsString = () => {
    * 11、判断字符串以什么开头，以什么结尾
    * 12、获取指定下标的元素
    */
-  return <span>
-    isString
-    {
-      // "1,2,3,4,5" => 按照逗号分隔 split(',') =>  ['1', '2', '3', '4', '5']
-      // String(8989) => "8989";
-      // "abcdefg" => ? "cde";  substr(2,3) => (下标, 要多少个)  substring(4,5) => (下标, 第几个)
-      // "abcdfhj" => "bcd"; includes("bcd") => 返回的是布尔值
-      // "1223ajksdhiuweosadfhd" => "a" indexOf("a") 没有找到返回就是 -1, lastIndexOf
-      // "a23a23a32" => replaceAll , replace
-      // "a" <=> 'A' toLowerCase, toUpperCase
-      // trim();// 移除前后端空格的
-      // startsWith 判断开头  endsWith 判断结尾 返回是布尔值
-      // at(index) [index]
-    }
-  </span>
-}
+  return (
+    <span>
+      isString
+      {
+        // "1,2,3,4,5" => 按照逗号分隔 split(',') =>  ['1', '2', '3', '4', '5']
+        // String(8989) => "8989";
+        // "abcdefg" => ? "cde";  substr(2,3) => (下标, 要多少个)  substring(4,5) => (下标, 第几个)
+        // "abcdfhj" => "bcd"; includes("bcd") => 返回的是布尔值
+        // "1223ajksdhiuweosadfhd" => "a" indexOf("a") 没有找到返回就是 -1, lastIndexOf
+        // "a23a23a32" => replaceAll , replace
+        // "a" <=> 'A' toLowerCase, toUpperCase
+        // trim();// 移除前后端空格的
+        // startsWith 判断开头  endsWith 判断结尾 返回是布尔值
+        // at(index) [index]
+      }
+    </span>
+  );
+};
 
 const IsUndefined = () => {
   /**
@@ -75,9 +79,9 @@ const IsUndefined = () => {
    * name = 90;
    */
 
-  return <span>IsUndefined</span>
-}
+  return <span>IsUndefined</span>;
+};
 
 export default () => {
-  return <IsUndefined />
-}
+  return <IsUndefined />;
+};
