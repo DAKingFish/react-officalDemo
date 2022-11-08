@@ -10,7 +10,7 @@ import request from '@/request';
 */
 export const getList = (params = {}) => {
   // post请求不需要{}
-  return request.get('/online/user/list', { params });
+  return request.post('/online/user/list', params);
 };
 
 export const save = (params = {}) => {

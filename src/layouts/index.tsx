@@ -3,6 +3,10 @@ import { ConfigProvider } from 'antd';
 import { useHistory } from 'ice';
 import { useState, useEffect } from 'react';
 import './index.less';
+
+// /proxy/user/userinfo
+// `http://121.4.49.147:8360/unification/login?redirect=${location.href}&appId=7`;
+
 export default (props) => {
   // 路由实例
   const history = useHistory();

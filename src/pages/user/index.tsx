@@ -31,27 +31,13 @@ export default () => {
     const {
       data: { code, data },
     }: any = await getList(payload);
-    console.log('user页面', data);
     setLoading(false);
     if (code === 200) {
-      setPagination((parm) => ({
-        ...parm,
-        total: data.count,
-        pageNum: payload.pageNum,
-      }));
+      pagination.total = data.count;
+      pagination.pageNum = payload.pageNum;
       setDataSource(data.data);
     }
   };
-  /*  const onSubmit = async (parms) => {
-    const {
-      data: { code, data },
-    }: any = await save(parms);
-    if (code === 200) {
-      message.success('添加成功');
-    } else {
-      message.error(data.msg);
-    }
-  }; */
   const onSubmit = async () => {
     // 用useForm钩子将Modal数据
     const value = await form2.validateFields();
@@ -73,7 +59,7 @@ export default () => {
   };
   useEffect(() => {
     query();
-  }, []);
+  }, [pagination]);
   return (
     <div className="user">
       <div className="nav">
