@@ -15,6 +15,6 @@ export const save = (params = {}) => {
   return request.post('/online/user/save', params);
 };
 
-export const remove = (params = {}) => {
-  return request.post('/online/user/remove', params);
+export const remove = (id) => {
+  return request.post('/online/user/remove', { id });
 };
