@@ -29,6 +29,7 @@ export default () => {
     }: any = await getList(payload); // 看样子,根据传的参获取数据,获取数据的逻辑判断是
     setLoading(false);
     if (code === 200) {
+      console.log('home页面', data);
       pagination.total = data.count;
       pagination.pageNum = payload.pageNum;
       setDataSource(data.data); // 设置当前展示的数据

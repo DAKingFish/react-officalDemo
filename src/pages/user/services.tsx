@@ -5,7 +5,9 @@ import request from '@/request';
 // 问题很大 有思路,但是不会请求的代码,好陌生
 /* /user/list
 /user/save
-/user/remove */
+/user/remove
+/online 是配置代理的服务器的前缀
+*/
 export const getList = (params = {}) => {
   // post请求不需要{}
   return request.get('/online/user/list', { params });
