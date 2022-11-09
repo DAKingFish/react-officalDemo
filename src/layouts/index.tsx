@@ -14,7 +14,10 @@ export default (props) => {
   // TODO 在这里发请求获取用户信息，先判断用户是否已经登录了
   // 创建方法 userInfo()
   const userInfo = async () => {
-    return await request('/proxy/ersu/userinfo');
+    return await request.post('/proxy/user/userinfo');
+  };
+  const logOut = async () => {
+    return await request.post('/proxy/unification/logout');
   };
   // useEffect()
   useEffect(() => {
@@ -28,8 +31,8 @@ export default (props) => {
         <div className="app-header">
           App-Office-Demo
           <button
-            onClick={async () => {
-              await request('/proxy/unification/logout');
+            onClick={() => {
+              console.log(logOut());
             }}
           >
             退出
