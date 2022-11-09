@@ -3,7 +3,7 @@ import { ConfigProvider } from 'antd';
 import { useHistory } from 'ice';
 import { useState, useEffect } from 'react';
 import './index.less';
-
+import request from '../request';
 // /proxy/user/userinfo
 // `http://121.4.49.147:8360/unification/login?redirect=${location.href}&appId=7`;
 
@@ -12,7 +12,15 @@ export default (props) => {
   const history = useHistory();
   const [selectKey, setSelectKey] = useState('');
   // TODO 在这里发请求获取用户信息，先判断用户是否已经登录了
+  // 创建方法 userInfo()
+  const userInfo = async () => {
+    return await request('/proxy/ersu/userinfo');
+  };
   // useEffect()
+  useEffect(() => {
+    const res = userInfo();
+    console.log('看看', res);
+  }, []);
   console.log('本页面', window.location);
   return (
     <ConfigProvider locale={zhCn}>
