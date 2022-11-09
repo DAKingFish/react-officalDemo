@@ -25,7 +25,16 @@ export default (props) => {
   return (
     <ConfigProvider locale={zhCn}>
       <div className="app">
-        <div className="app-header">App-Office-Demo</div>
+        <div className="app-header">
+          App-Office-Demo
+          <button
+            onClick={async () => {
+              await request('/proxy/unification/logout');
+            }}
+          >
+            退出
+          </button>
+        </div>
         <div className="app-main">
           <div className="app-main-sider">
             <div
