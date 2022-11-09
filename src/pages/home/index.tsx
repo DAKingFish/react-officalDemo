@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { Table, Form, Input, Button, Space, Modal, message, Pagination } from 'antd';
 import { useEffect, useState } from 'react';
 import { getList, save } from './services';

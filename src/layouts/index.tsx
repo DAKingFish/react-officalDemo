@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import zhCn from 'antd/lib/locale/zh_CN';
 import { ConfigProvider } from 'antd';
 import { useHistory } from 'ice';
