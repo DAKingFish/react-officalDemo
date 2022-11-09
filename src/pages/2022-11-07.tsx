@@ -9,9 +9,7 @@ export default () => {
    * 5、join 数组转字符串 [1,2,3,4].join('?') => "1?2?3?4".split('?') => ['1','2','3','4']
    * 6、concat 数组的合并 [1,2,3].concat([2,3,4]) => [1,2,3,2,3,4] => 不会改变原数组
    * 7、includes 判断数组是否包含指定的元素，只适用于基本类型的数组
-  */
-  const arr = []
-  return <div>
-    数组的基本api
-  </div>
-}
+   */
+  const arr = [];
+  return <div>数组的基本api</div>;
+};

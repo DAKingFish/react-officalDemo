@@ -15,15 +15,20 @@ export default (props) => {
   // TODO 在这里发请求获取用户信息，先判断用户是否已经登录了
   // 创建方法 userInfo()
   const userInfo = async () => {
-    return await request.post('/proxy/user/userinfo');
+    const {
+      data: { code },
+    } = await request.post('/proxy/user/userinfo');
+    console.log('验证码', code);
+    if (code === 40005) {
+      window.location.href = `http://121.4.49.147:8360/unification/login?redirect=${location.href}&appId=7`;
+    }
   };
   const logOut = async () => {
-    return await request.post('/proxy/unification/logout');
+    return await request('/proxy/unification/logout');
   };
   // useEffect()
   useEffect(() => {
-    const res = userInfo();
-    console.log('看看', res);
+    userInfo();
   }, []);
   console.log('本页面', window.location);
   return (
