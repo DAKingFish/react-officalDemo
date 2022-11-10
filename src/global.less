@@ -1,0 +1,37 @@
+@import 'antd/dist/antd.css';
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+.my-table{
+  &-header{
+    height: 40px;
+    display: flex;
+    &-column{
+      font-size: 13px;
+      width: 200px;
+      background-color: #fff;
+      color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      border: 1px solid #eee;
+    }
+  }
+  &-body{
+    &-rows{
+      display: flex;
+      &-col{
+        background-color: #f8f8f8;
+        height: 40px;
+        width: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #eee;
+      }
+    }
+  }
+}
