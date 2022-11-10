@@ -36,14 +36,12 @@ export default () => {
       {
         title: '状态',
         dataIndex: 'isok',
-        render(isok) {
+        render(record) {
           return (
-            <Switch checkedChildren={isok ? "完成" : ''} unCheckedChildren={isok ? '':'未完成'} defaultChecked
+            <Switch checkedChildren="完成" unCheckedChildren='未完成' checked={record.isok}
               onChange={() => {
-                isok = !isok;
-                console.log(isok)
+                record.isok = ! record.isok
                 setData([...data])
-                console.log(isok)
               }} />
           )
 
@@ -55,9 +53,18 @@ export default () => {
         render(value, record, index) {
           return (
             <Space>
-              <Button type="primary" >确认完成</Button>
-              <Button type="primary">置顶</Button>
-              <Button type="primary">删除</Button>
+              <Button type="primary" onClick={()=>{
+                console.log('date',data,'index',index)
+                data.splice(index,1)
+                data.unshift(record)
+                setData([...data])
+              }}
+              >置顶</Button>
+              <Button type="primary" onClick={()=>{
+                console.log('date',data,'index',index)
+                data.splice(index,1)
+                setData([...data])
+              }}>删除</Button>
             </Space>
           )
         }

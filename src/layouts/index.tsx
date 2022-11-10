@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import zhCn from 'antd/lib/locale/zh_CN';
-import { ConfigProvider } from 'antd';
+import { ConfigProvider ,Button} from 'antd';
 import { useHistory } from 'ice';
 import { useState, useEffect } from 'react';
 import './index.less';
@@ -28,6 +28,7 @@ export default (props) => {
   };
   const logOut = async () => {
     return await request('/proxy/unification/logout');
+    
   };
   useEffect(() => {
     userInfo();
@@ -38,13 +39,15 @@ export default (props) => {
       <div className="app">
         <div className="app-header">
           App-Office-Demo
-          <button
+          <Button
+          danger
             onClick={() => {
-              console.log(logOut());
+              logOut(),
+              window.location.reload();
             }}
           >
             退出
-          </button>
+          </Button>
         </div>
         <div className="app-main">
           <div className="app-main-sider">
