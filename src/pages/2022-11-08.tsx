@@ -1,10 +1,8 @@
 /**
  * location
- *  const params = new URLSearchParams(location.search); // 获取指定的参数
+ * const params = new URLSearchParams(location.search); // 获取指定的参数
  * history
- *
  */
-
 import { useState, useMemo, useRef } from 'react';
 
 /**
