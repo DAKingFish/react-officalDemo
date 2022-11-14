@@ -2,7 +2,7 @@
 * 基于 antd Table 手动写一个 简单版本模拟一下
 */
 
-import { Table, Button, Space } from "antd";
+import {  Button, Space } from "antd";
 
 interface TableProps {
   dataSource: any[],
