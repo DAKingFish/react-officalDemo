@@ -59,6 +59,7 @@ export default () => {
     <h2>待办列表</h2>
     <Table
       dataSource={dataSource}
+      pagination={false}
       columns={[{
         title: '任务',
         dataIndex: 'name',

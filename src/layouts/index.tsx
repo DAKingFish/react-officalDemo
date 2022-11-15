@@ -1,21 +1,17 @@
 /* eslint-disable no-console */
 import zhCn from 'antd/lib/locale/zh_CN';
-import { ConfigProvider ,Button} from 'antd';
-import { useHistory } from 'ice';
+import { ConfigProvider, Space, Dropdown, Menu } from 'antd';
 import { useState, useEffect } from 'react';
-import './index.less';
+import { PageContainer, ProLayout } from '@ant-design/pro-layout';
 import request from '../request';
+import { createBrowserHistory, useHistory } from 'ice';
+import './index.less';
 
-// /proxy/user/userinfo
-// `http://121.4.49.147:8360/unification/login?redirect=${location.href}&appId=7`;
+const { listen } = createBrowserHistory(); // 创建实例，用于监听浏览器会退前进
 
 export default (props) => {
-  // 路由实例
   const history = useHistory();
-  const [selectKey, setSelectKey] = useState('');
-  const [data, setData] = useState([]);
-  // TODO 在这里发请求获取用户信息，先判断用户是否已经登录了
-  // 创建方法 userInfo()
+  const [menus, setMenus] = useState([]);
   const userInfo = async () => {
     const {
       data: { code, data },
@@ -23,48 +19,92 @@ export default (props) => {
     if (code === 40005) {
       window.location.href = `http://121.4.49.147:8360/unification/login?redirect=${location.href}&appId=7`;
     } else {
-      setData(data.menus)
+      setMenus(data.menus)
     }
   };
   const logOut = async () => {
-    return await request('/proxy/unification/logout');
-    
+    const { data: { code } } = await request('/proxy/unification/logout');
+    if(code === 200){
+      window.location.href = `http://121.4.49.147:8360/unification/login?redirect=${location.href}&appId=7`;
+    }
   };
+  const [path, setPath] = useState('/')
+  const setPathName = () => {
+    const path = location.hash.substr(1);
+    const index = location.hash.substr(1).indexOf('?'); // 去除参数
+    setPath(index === -1 ? path : path.substring(0, index));
+  };
+  useEffect(() => {
+    setPathName(); // 同步左侧菜单
+    // 监听路径改变，菜单联动
+    const removeListener = listen(setPathName);
+    return () => {
+      // 注销remove
+      removeListener();
+    };
+  }, []);
   useEffect(() => {
     userInfo();
   }, []);
-  console.log('本页面', window.location);
   return (
     <ConfigProvider locale={zhCn}>
-      <div className="app">
-        <div className="app-header">
-          App-Office-Demo
-          <Button
-          danger
-            onClick={() => {
-              logOut(),
-              window.location.reload();
-            }}
-          >
-            退出
-          </Button>
-        </div>
-        <div className="app-main">
-          <div className="app-main-sider">
-            {data.map((item: any) => {
-              return (<div
-                className={selectKey === item.path ? 'app-main-sider-item-selected' : 'app-main-sider-item'}
-                onClick={() => {
-                  history.push(item.path);
-                  setSelectKey(item.path);
-                }}
-              >
-                {item.name}
-              </div>)
-            })}
-          </div>
-          <div className="app-main-content">{props.children}</div>
-        </div>
+      <div
+        style={{
+          height: '100vh',
+        }}
+      >
+        <ProLayout
+          siderWidth={260}
+          title="React-Office-Demo"
+          iconfontUrl={'//at.alicdn.com/t/c/font_3520199_tnbardcesp.js'}
+          location={{
+            pathname: path,
+          }}
+          menuDataRender={() => menus}
+          menuItemRender={(item: any, dom) => (
+            <div
+              onClick={() => {
+                history.push(item.path);
+                // 这个地方不能依赖于监听，因为监听是原生事件，原生事件中调用hooks会不同步
+                setPathName();
+              }}
+            >
+              {dom}
+            </div>
+          )}
+          rightContentRender={() => (
+            <div className="app-right-header">
+              <Space>
+                <Dropdown
+                  placement="bottom"
+                  overlay={
+                    <Menu>
+                      <Menu.Item
+                        onClick={logOut}
+                      >
+                        退出登录
+                      </Menu.Item>
+                    </Menu>
+                  }
+                >
+                  <a
+                    style={{
+                      marginRight: 12,
+                      whiteSpace: 'nowrap',
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    测试用户
+                  </a>
+                </Dropdown>
+              </Space>
+            </div>
+          )}
+        >
+          <PageContainer>
+            {props.children}
+          </PageContainer>
+        </ProLayout>
       </div>
     </ConfigProvider>
   );
