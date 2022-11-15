@@ -6,6 +6,7 @@ import { Button, Select, Space, Table } from 'antd';
 import { useState } from 'react';
 
 // 制造100条数据
+// Array.fill('x') 将原数组全部替换成x,
 const dataSource = new Array(96)
   .fill({
     name: '姓名',
@@ -45,9 +46,19 @@ const columns = [
 export default () => {
   // 对于后端只查询一部分，解决网路请求慢的问题
   // 对于前端至渲染部分的dom，解决渲染多造成页面卡顿的问题
-  const [pageSize, setPageSize] = useState(10);
-  const [pageNum, setPageNum] = useState(1);
-  const totalNum = Math.ceil(dataSource.length / pageSize);
+
+  // Math.ceil() 向上取整
+
+  // array.slice() 返回原数组的浅拷贝新数组(是不是地址值没有变)
+  //slice() 方法返回一个新的数组对象，这一对象是一个由 begin 和 end 
+  //决定的原数组的浅拷贝（包括 begin，不包括end）
+
+  //useState 会刷新页面
+
+  //disableed 在第一页和最后一页
+  const [pageSize, setPageSize] = useState(10); // 每页展示多少数据
+  const [pageNum, setPageNum] = useState(1);// 当前页
+  const totalNum = Math.ceil(dataSource.length / pageSize);// 总页数
   return (
     <div>
       <Table

@@ -8,10 +8,12 @@ import Item from 'antd/lib/list/Item';
  * es6
  *   对象的遍历
  *   使用 Object.keys();
- *  数组的高阶函数使用 （接受函数作为参数，或者返回一个函数）
+ *   Object.keys() 方法会返回一个由一个给定对象(对象,数组,字符串)的自身可枚举属性组成的数组，
+ *   数组中属性名的排列顺序和正常循环遍历该对象时返回的顺序一致。
+ *   数组的高阶函数使用 （接受函数作为参数，或者返回一个函数）
  *
- *  forEach
- *  map
+ *  forEach 遍历无返回值
+ *  map 遍历有返回值 返回数组
  *  find
  *  findIndex
  *  some
